@@ -19,13 +19,10 @@ class DiscussionSerializer(serializers.ModelSerializer):
     class Meta:
         model=Discussion
         fields='__all__'
-        # get tags from many to many field
+    # get tags
     def get_tags(self, obj):
-        # get all posts for this discussion
         posts = Post.objects.filter(discussion=obj)
-        # get all tags for these posts. Each post contains one tag and one discussion
         tags = [post.tag for post in posts]
-        # serialize each tag and return
         result=[]
         for tag in tags:
             serializer = TagSerializer(tag)

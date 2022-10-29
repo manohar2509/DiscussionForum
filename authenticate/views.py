@@ -6,7 +6,6 @@ from authenticate.models import User
 from .serializers import UserSerializer
 import jwt,datetime
 
-# Create your views here.
 class RegisterView(APIView):
     def post(self,request):
         try:
@@ -49,7 +48,6 @@ class LoginView(APIView):
 class UserProfileView(APIView):
     def get(self,request):
         try:
-            # if no token is sent, return error
             if 'jwt' not in request.headers:
                 return Response({'error':'no token','status':'failure'})
             token=request.headers['jwt']
